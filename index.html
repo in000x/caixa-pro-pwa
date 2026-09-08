@@ -1,1 +1,47 @@
-<!DOCTYPE html><html lang=pt-BR><head><meta charset=UTF-8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name=theme-color content=#0a101d><title>Caixa Pro</title><link rel=manifest href=./manifest.webmanifest><link rel=icon href=./icon.svg><style>body{margin:0;background:#0a101d;color:#e8edf6;font:16px system-ui;padding:24px}a{color:#d4a843}</style></head><body><h1>Caixa Pro</h1><p>Carregando PDV…</p><p>Se esta tela ficar, o deploy do index completo falhou.</p><script>if('serviceWorker' in navigator)navigator.serviceWorker.register('./sw.js')</script></body></html>
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"/>
+<meta name="theme-color" content="#0a101d"/>
+<meta name="apple-mobile-web-app-capable" content="yes"/>
+<title>Caixa Pro</title>
+<link rel="manifest" href="./manifest.webmanifest"/>
+<link rel="icon" href="./icon.svg"/>
+<style>
+:root{--ink:#0a101d;--bg:#0a101d;--elev:#121a2b;--card:#161f32;--line:#243049;--fg:#e8edf6;--muted:#8b97ad;--gold:#d4a843;--bad:#e35d5d}
+*{box-sizing:border-box}html,body{margin:0;background:var(--bg);color:var(--fg);font:15px/1.4 system-ui,sans-serif}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+input{font:inherit;color:var(--fg);background:var(--elev);border:1px solid var(--line);border-radius:12px;padding:12px 14px;width:100%;min-height:44px}
+body{padding:env(safe-area-inset-top) 0 calc(88px + env(safe-area-inset-bottom))}
+header{position:sticky;top:0;z-index:20;background:rgba(10,16,29,.92);padding:10px 16px 0;border-bottom:1px solid var(--line)}
+header h1{margin:0;font-size:16px}header p{margin:2px 0 8px;color:var(--muted);font-size:12px;display:flex;gap:8px;align-items:center}
+.net{font-size:11px;padding:2px 8px;border-radius:999px;border:1px solid var(--line)}
+.net.on{color:#8fe0b3}.net.off{color:#e0a54b}
+nav{display:flex;gap:6px;padding-bottom:10px}nav button{flex:1;min-height:40px;border-radius:10px;color:var(--muted)}
+nav button.on{background:var(--gold);color:var(--ink);font-weight:700}
+main{padding:14px 16px 20px}.chips{display:flex;gap:8px;overflow:auto;padding-bottom:10px}
+.chip{white-space:nowrap;min-height:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--muted)}
+.chip.on{background:var(--gold);color:var(--ink)}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.card{text-align:left;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:12px;min-height:92px}
+.card .p{color:var(--gold);margin-top:8px}.card .s{color:#5d6a82;font-size:12px;margin-top:4px}
+.dock{position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(18,26,43,.97);border-top:1px solid var(--line);padding:8px 12px calc(10px + env(safe-area-inset-bottom))}
+.pay{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:8px}
+.pay button,.btn{min-height:48px;border-radius:12px;background:var(--elev)}
+.btn-gold{background:var(--gold);color:var(--ink);font-weight:700}.btn-bad{background:#3a1b1b;color:#ffb4b4}
+.sheet{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.55);display:flex;align-items:flex-end;justify-content:center}
+.sheet .box{width:100%;max-width:480px;max-height:88vh;overflow:auto;background:var(--elev);border-radius:20px 20px 0 0;padding:18px 16px calc(20px + env(safe-area-inset-bottom))}
+.line{display:flex;justify-content:space-between;gap:8px;padding:8px 0}.muted{color:var(--muted)}.gold{color:var(--gold)}
+.ticket{background:#f4efe4;color:#0a101d;border-radius:12px;padding:16px;font-size:13px}
+.ticket h2{margin:0;text-align:center}.ticket .st{text-align:center;font-weight:800;border:2px solid currentColor;padding:6px;margin:10px 0}
+.ticket .st.ok{color:#1f7a4d}.ticket .st.void{color:#9b2c2c}.hidden{display:none!important}
+.install{margin:0 0 12px;padding:12px;border:1px solid var(--gold);border-radius:14px;background:#1a160c}
+@media print{body *{visibility:hidden}#print-root,#print-root *{visibility:visible}#print-root{position:absolute;inset:0;background:#fff}}
+</style></head>
+<body>
+<header><h1 id="shopTitle">Caixa Pro</h1><p id="todayLine">Hoje R$ 0,00 · 0 vendas <span id="net" class="net off">offline</span></p>
+<nav><button class="on" data-tab="caixa">Caixa</button><button data-tab="hist">Histórico</button><button data-tab="gestao">Gestão</button></nav></header>
+<main id="app"></main><div id="dock" class="dock hidden"></div><div id="modal"></div><div id="print-root" class="hidden"></div>
+<script src="./app.js"></script>
+</body></html>
